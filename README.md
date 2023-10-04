@@ -475,3 +475,209 @@ Caso dê tudo certo, a resposta será assim:
 Sem corpo de requisição
 
 Sem corpo de resposta (status - 204)
+
+## Installment
+
+<h2 align ='center'> Cadastro das informações de parcelas de uma tabela de taxa </h2>
+
+`POST api/installment/table/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "installment_number": 1,
+  "installment_interest": 5,
+  "comission": 1.22
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_number": 1,
+  "installment_interest": 5,
+  "comission": 1.22
+}
+```
+
+<h2 align ='center'> Obter informações de uma parcela de uma tabela de taxa </h2>
+
+`GET api/installment/retrieve/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+Sem corpo de requisição
+
+<b>Observação</b>: para obter valores dinâmicos do valor da parcela e do valor total, é necessário enviar como query params o value, tendo como valor o valor de interesse do empréstimo.
+
+Exemplo:
+`http://127.0.0.1:8000/api/installment/retrieve/1/?value=1000`
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_number": 1,
+  "installment_interest": 5,
+  "comission": 1.22,
+  "installment_value": 1050.0,
+  "full_value": 1050.0
+}
+```
+
+<h2 align ='center'> Atualizar informações de uma parcela de uma tabela de taxa </h2>
+
+`PATCH api/installment/update/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "comission": 1.3
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_number": 1,
+  "installment_interest": 5,
+  "comission": 1.3
+}
+```
+
+<h2 align ='center'> Deletar informações de uma parcela de uma tabela de taxa </h2>
+
+`DELETE api/installment/delete/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+Sem corpo de requisição
+
+Sem corpo de resposta (status - 204)
+
+## Solicitation
+
+<h2 align ='center'> Cadastro das informações do empréstimo em uma solicitação </h2>
+
+`POST api/solicitations/ - FORMATO DA REQUISIÇÃO`
+
+<b>Observação:</b> como no front-end a solicitação vai sendo realizada em várias etapas, todos os campos dessa tabela são opcionais.
+
+Assim como, o campo "contract_type" apenas aceita os valores "automatic" e "manual", havendo como default o valor "automatic"
+
+```json
+{
+  "desired_value": 7000
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_interest": null,
+  "installment_interest_value": null,
+  "comission": null,
+  "comission_value": null,
+  "installment_value": null,
+  "card_number": null,
+  "desired_value": 7000.0,
+  "total_loan": null,
+  "contract_type": "automatic",
+  "client": null,
+  "installment": null,
+  "rate_table": null
+}
+```
+
+<h2 align ='center'> Listar todas as solicitações cadastradas </h2>
+
+`GET api/solicitations/ - FORMATO DA REQUISIÇÃO`
+
+Sem corpo de requisição
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+[
+  {
+    "id": 1,
+    "installment_interest": null,
+    "installment_interest_value": null,
+    "comission": 1.22,
+    "comission_value": null,
+    "installment_value": null,
+    "card_number": null,
+    "desired_value": 7000.0,
+    "total_loan": null,
+    "contract_type": "automatic",
+    "client": null,
+    "installment": null,
+    "rate_table": null
+  }
+]
+```
+
+<h2 align ='center'> Obter as informações de uma solicitação </h2>
+
+`GET api/solicitation/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+Sem corpo de requisição
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_interest": null,
+  "installment_interest_value": null,
+  "comission": 1.22,
+  "comission_value": null,
+  "installment_value": null,
+  "card_number": null,
+  "desired_value": 7000.0,
+  "total_loan": null,
+  "contract_type": "automatic",
+  "client": null,
+  "installment": null,
+  "rate_table": null
+}
+```
+
+<h2 align ='center'> Atualizar as informações de uma solicitação </h2>
+
+`PATCH api/solicitation/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+```json
+{
+  "comission": 1.22
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+```json
+{
+  "id": 1,
+  "installment_interest": null,
+  "installment_interest_value": null,
+  "comission": 1.22,
+  "comission_value": null,
+  "installment_value": null,
+  "card_number": null,
+  "desired_value": 7000.0,
+  "total_loan": null,
+  "contract_type": "automatic",
+  "client": null,
+  "installment": null,
+  "rate_table": null
+}
+```
+
+<h2 align ='center'> Deletar as informações de uma solicitação </h2>
+
+`DELETE api/solicitation/<int:pk>/ - FORMATO DA REQUISIÇÃO`
+
+Sem corpo de requisição
+
+Sem corpo de resposta (status - 204)
