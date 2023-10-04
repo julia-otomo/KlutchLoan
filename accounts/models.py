@@ -12,4 +12,6 @@ class Account(models.Model):
         max_length=20, choices=AccountType.choices, default=AccountType.CURRENT_ACCOUNT
     )
     account_number = models.CharField(max_length=20)
-    client = models.OneToOneField("clients.Client", on_delete=models.CASCADE)
+    client = models.OneToOneField(
+        "clients.Client", on_delete=models.CASCADE, related_name="bank"
+    )
