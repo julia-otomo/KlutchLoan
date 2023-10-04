@@ -8,18 +8,18 @@ from .serializers import (
 from django.shortcuts import get_object_or_404
 
 
-class RateTableCreateView(generics.CreateAPIView):
-    queryset = RateTable
+class RateTableListCreateView(generics.ListCreateAPIView):
+    queryset = RateTable.objects.all()
     serializer_class = RateTableSerializer
 
 
 class RateTableDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RateTable
+    queryset = RateTable.objects.all()
     serializer_class = RateTableSerializer
 
 
 class InstallmentCreateView(generics.CreateAPIView):
-    queryset = Installment
+    queryset = Installment.objects.all()
     serializer_class = InstallmentCreateUpdateSerializer
 
     def perform_create(self, serializer):
@@ -33,15 +33,15 @@ class InstallmentCreateView(generics.CreateAPIView):
 
 
 class InstallmentRetrieveView(generics.RetrieveAPIView):
-    queryset = Installment
+    queryset = Installment.objects.all()
     serializer_class = InstallmentGetSerializer
 
 
 class InstallmentUpdateView(generics.UpdateAPIView):
-    queryset = Installment
+    queryset = Installment.objects.all()
     serializer_class = InstallmentCreateUpdateSerializer
 
 
 class InstallmentDeleteView(generics.DestroyAPIView):
-    queryset = Installment
+    queryset = Installment.objects.all()
     serializer_class = InstallmentCreateUpdateSerializer

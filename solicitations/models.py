@@ -8,15 +8,13 @@ class ContractType(models.TextChoices):
 
 class Solicitation(models.Model):
     installment_interest = models.IntegerField(null=True)
-    installment_interest_value = models.DecimalField(
-        max_digits=10, decimal_places=2, null=True
-    )
-    comission = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    comission_value = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    installment_value = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    installment_interest_value = models.FloatField(null=True)
+    comission = models.FloatField(null=True)
+    comission_value = models.FloatField(null=True)
+    installment_value = models.FloatField(null=True)
     card_number = models.CharField(max_length=16, null=True)
-    desired_value = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    total_loan = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    desired_value = models.FloatField(null=True)
+    total_loan = models.FloatField(null=True)
     contract_type = models.CharField(
         max_length=10, choices=ContractType.choices, default=ContractType.AUTOMATIC
     )
