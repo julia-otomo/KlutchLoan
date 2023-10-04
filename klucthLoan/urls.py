@@ -24,4 +24,5 @@ urlpatterns = [
     path("api/", include("clients.urls")),
     path("api/", include("accounts.urls")),
     path("api/", include("cards.urls")),
+    path("api/", include("rateTables.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
