@@ -1,6 +1,6 @@
 import imghdr
-from rest_framework import generics, status
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.exceptions import ValidationError
 from .models import Card
 from .serializers import CardSerializer
 from clients.models import Client
@@ -32,15 +32,16 @@ class ClientCardListCreateView(generics.ListCreateAPIView):
 
         allowed_image_mime_types = ["jpeg", "png", "gif"]
 
-        if (
-            not imghdr.what(front_image, h=None) in allowed_image_mime_types
-            or not imghdr.what(back_image, h=None) in allowed_image_mime_types
-            or not imghdr.what(selfie_image, h=None) in allowed_image_mime_types
-        ):
-            return Response(
-                {"error": "Os arquivos não são imagens válidas."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        if not (front_image and back_image and selfie_image):
+            raise ValidationError("Todos os campos de imagem são necessários.")
+
+        def is_valid_image(file):
+            image_format = imghdr.what(file)
+            return image_format in allowed_image_mime_types
+
+        for image in [front_image, back_image, selfie_image]:
+            if not is_valid_image(image.file):
+                raise ValidationError("Arquivos não compatíveis")
 
         serializer.save(client=client)
 
