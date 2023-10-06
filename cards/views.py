@@ -1,6 +1,7 @@
-import imghdr
+# import imghdr
 from rest_framework import generics
-from rest_framework.exceptions import ValidationError
+
+# from rest_framework.exceptions import ValidationError
 from .models import Card
 from .serializers import CardSerializer
 from clients.models import Client
