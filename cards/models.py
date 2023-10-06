@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Card(models.Model):
-    card_number = models.CharField(max_length=16)
+    card_number = models.CharField(max_length=16, unique=True)
     expiration_date = models.CharField(max_length=5)
     cvv = models.CharField(max_length=4)
     front_image = models.ImageField()
