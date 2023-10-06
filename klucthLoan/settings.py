@@ -161,7 +161,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://klutchloan-front-julia-otomo.vercel.app/",
+    "https://klutchloan-front-julia-otomo.vercel.app",
 ]
 
 # Default primary key field type
