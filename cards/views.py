@@ -1,7 +1,6 @@
-# import imghdr
+import imghdr
 from rest_framework import generics
-
-# from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError
 from .models import Card
 from .serializers import CardSerializer
 from clients.models import Client
@@ -27,22 +26,22 @@ class ClientCardListCreateView(generics.ListCreateAPIView):
 
         client = get_object_or_404(Client, cpf=get_client_cpf)
 
-        # front_image = self.request.data.get("front_image")
-        # back_image = self.request.data.get("back_image")
-        # selfie_image = self.request.data.get("selfie_image")
+        front_image = self.request.data.get("front_image")
+        back_image = self.request.data.get("back_image")
+        selfie_image = self.request.data.get("selfie_image")
 
-        # allowed_image_mime_types = ["jpeg", "png", "gif", "jpg"]
+        allowed_image_mime_types = ["jpeg", "png", "gif", "jpg"]
 
-        # if not (front_image and back_image and selfie_image):
-        #     raise ValidationError("Todos os campos de imagem são necessários.")
+        if not (front_image and back_image and selfie_image):
+            raise ValidationError("Todos os campos de imagem são necessários.")
 
-        # def is_valid_image(file):
-        #     image_format = imghdr.what(file)
-        #     return image_format in allowed_image_mime_types
+        def is_valid_image(file):
+            image_format = imghdr.what(file)
+            return image_format in allowed_image_mime_types
 
-        # for image in [front_image, back_image, selfie_image]:
-        #     if not is_valid_image(image.file):
-        #         raise ValidationError("Arquivos não compatíveis")
+        for image in [front_image, back_image, selfie_image]:
+            if not is_valid_image(image.file):
+                raise ValidationError("Arquivos não compatíveis")
 
         serializer.save(client=client)
 
