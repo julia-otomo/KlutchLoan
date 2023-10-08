@@ -64,7 +64,22 @@ Esta aplicação tem como objetivo simular a solicitação de empréstimo de cli
 <b>Observação</b>:
 Para esse projeto foram utilizadas as versões 9.6.2 do node e 3.11.3 do python.
 
-- Primeiramente é necessário é necessário clonar o repositório;
+Url do deploy para testar no insomnia: https://loan-api-lrkm.onrender.com
+
+Caso prefira clonar o repositório:
+
+- Primeiramente é necessário clonar o repositório -> na página do repositório, há um botão azul escrito "code", ao clicar no mesmo irá mostrar um dropdown com as opções HTTPS, SSH, GitHub CLI. Escolha a opção SSH e copie o conteúdo. Após isso, abra um terminal, escreva git clone juntamente com o conteúdo copiado (como mostra na imagem abaixo);
+
+<img src="/chave-ssh.png">
+
+<img src="/terminal.png">
+
+-Para abrir o projeto no vscode, abra o terminal no local aonde foi clonado o projeto e escreva:
+
+```bash
+code .
+```
+
 - Realizar a criação de um arquivo .env na raiz (copie o conteúdo do .env.example para o .env criado);
 - Crie um banco de dados no postgres e configure as variáveis de ambiente no arquivo .env que estào relacionadas com as informações do banco de dados criado.
 - Depois insira o seguinte comando no terminal ao iniciar o projeto para instalar todas as dependências necessárias:
