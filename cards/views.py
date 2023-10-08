@@ -5,6 +5,7 @@ from .models import Card
 from .serializers import CardSerializer
 from clients.models import Client
 from django.shortcuts import get_object_or_404
+import cloudinary.uploader
 
 
 class ClientCardListCreateView(generics.ListCreateAPIView):
@@ -43,7 +44,37 @@ class ClientCardListCreateView(generics.ListCreateAPIView):
             if not is_valid_image(image.file):
                 raise ValidationError("Arquivos não compatíveis")
 
-        serializer.save(client=client)
+        front_image_cloud = cloudinary.uploader.upload(front_image)
+        back_image_cloud = cloudinary.uploader.upload(back_image)
+        selfie_image_cloud = cloudinary.uploader.upload(selfie_image)
+
+        base_cloudinary_url = "http://res.cloudinary.com/dojrawoma/image/upload/"
+
+        front_image_url = (
+            base_cloudinary_url
+            + front_image_cloud["public_id"]
+            + "."
+            + front_image_cloud["format"]
+        )
+        back_image_url = (
+            base_cloudinary_url
+            + back_image_cloud["public_id"]
+            + "."
+            + back_image_cloud["format"]
+        )
+        selfie_image_url = (
+            base_cloudinary_url
+            + selfie_image_cloud["public_id"]
+            + "."
+            + selfie_image_cloud["format"]
+        )
+
+        serializer.save(
+            client=client,
+            front_image=front_image_url,
+            back_image=back_image_url,
+            selfie_image=selfie_image_url,
+        )
 
         return super().perform_create(serializer)
 

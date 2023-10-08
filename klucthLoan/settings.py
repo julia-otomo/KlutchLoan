@@ -14,6 +14,9 @@ from pathlib import Path
 import dj_database_url
 import dotenv
 from django.core.management.utils import get_random_secret_key
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 dotenv.load_dotenv()
 
@@ -48,7 +51,13 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular", "corsheaders"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "drf_spectacular",
+    "corsheaders",
+    "cloudinary",
+    "cloudinary_storage",
+]
 
 MY_APPS = ["clients", "accounts", "cards", "rateTables", "solicitations"]
 
@@ -155,9 +164,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -168,3 +174,11 @@ CORS_ALLOWED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+cloudinary.config(
+    cloud_name="dojrawoma",
+    api_key="358612475111781",
+    api_secret="ujmSW9hNJiSVPQw8apcv5pQgL-Y",
+)
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
